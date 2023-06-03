@@ -1,0 +1,14 @@
+.wrapper {
+    width: 100%;
+    background-color: #1d1d1f;
+    margin-top: 40px;
+    padding: 20px 120px;
+    display: grid;
+    grid-gap: 30px;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.wrapper > div:nth-child(1) > p {
+    padding: 13px 0;
+    text-align: justifys;
+}

@@ -1,0 +1,11 @@
+.wrapper {
+    width: 100%;
+    height: calc(33.3vw);
+    background-color: #eee;
+}
+
+.wrapper img {
+    width: 100%;
+    height: calc(33.3vw);
+    object-fit: contain;
+}

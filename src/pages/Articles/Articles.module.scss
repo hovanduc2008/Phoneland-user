@@ -1,0 +1,25 @@
+.wrapper {
+    padding: 0 13px;
+}
+
+.sidebar {
+    color: #1d1d1f;
+    font-size: 1.9rem;
+    font-weight: 600;
+}
+.sidebar div {
+    padding: 13px 0;
+    cursor: pointer;
+}
+
+.list {
+    margin-top: 40px;
+    color: #131313;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+.items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 13px;
+}

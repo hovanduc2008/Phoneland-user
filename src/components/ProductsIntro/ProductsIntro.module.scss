@@ -1,0 +1,23 @@
+.wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #1d1d1f;
+    margin-top: 40px;
+}
+.list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 7px;
+}
+.title {
+    font-size: 3rem;
+    margin-bottom: 24px;
+}
+
+.more {
+    margin-top: 30px;
+    margin-bottom: 13px;
+}

@@ -1,0 +1,52 @@
+.wrapper {
+    padding: 30px 0;
+    color: #131313;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    grid-gap: 30px;
+}
+.item {
+    margin: 20px 0;
+    background-color: rgb(206, 201, 201, 0.3);
+    padding: 7px 13px;
+    border-radius: 13px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+.item p {
+    &:nth-child(2n + 2) {
+        text-align: right;
+    }
+}
+
+.pd-list table {
+    width: 100%;
+}
+
+.pd-list table input {
+    border-radius: 13px;
+    font-size: 1.7rem;
+    padding: 0 7px;
+    width: 40px;
+    height: 40px;
+}
+
+.pd-list table th,
+.pd-list table td {
+    padding: 7px 2px;
+    text-align: left;
+}
+.pd-list table td {
+    border-top: 1px solid #eee;
+}
+
+.pd-list table th:nth-last-child(1),
+.pd-list table td:nth-last-child(2) {
+    padding: 0 13px;
+}
+
+.info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 10px 0;
+}
