@@ -23,10 +23,6 @@ export const calculateTotal = (cartItems) => {
 };
 
 export const checkout = () => {
-    // Thực hiện việc thanh toán ở đây
-    // ...
-
-    // Xóa thông tin giỏ hàng khỏi local storage hoặc session
     localStorage.removeItem('cartItems');
     sessionStorage.removeItem('cartItems');
 };

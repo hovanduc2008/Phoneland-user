@@ -5,10 +5,13 @@ import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import styles from './Cart.module.scss';
 import FormInput from '~/components/AuthForm/FormInput';
 import Button from '~/components/Button';
+import CartItem from './CartItem';
+import routes from '~/config/routes';
 
 const cx = classNames.bind(styles);
 
 function Cart() {
+    console.log(localStorage.getItem('cartItems'));
     return (
         <div className={cx('wrapper')}>
             <div className={cx('left')}>
@@ -23,53 +26,15 @@ function Cart() {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <img
-                                        src="https://shopdunk.com/images/thumbs/0000600_iphone-se-2022_80.png"
-                                        alt="n"
-                                    />
-                                </td>
-                                <td>
-                                    <div>
-                                        <p>Iphone SE</p>
-                                        <p>Dung lượng: 130GB</p>
-                                    </div>
-                                </td>
-                                <td>9.000.000đ</td>
-                                <td>
-                                    <input value="1" style={{ textAlign: 'center' }} type="text" />
-                                </td>
-                                <td>
-                                    <FontAwesomeIcon icon={faTrashCan} />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img
-                                        src="https://shopdunk.com/images/thumbs/0008734_iphone-14-pro-128gb_80.png"
-                                        alt="n"
-                                    />
-                                </td>
-                                <td>
-                                    <div>
-                                        <p>Iphone SE</p>
-                                        <p>Dung lượng: 130GB</p>
-                                    </div>
-                                </td>
-                                <td>9.000.000đ</td>
-                                <td>
-                                    <input value="1" style={{ textAlign: 'center' }} type="text" />
-                                </td>
-                                <td>
-                                    <FontAwesomeIcon icon={faTrashCan} />
-                                </td>
-                            </tr>
+                            <CartItem />
+                            <CartItem />
                         </tbody>
                     </table>
                     <div className={cx('other-handel')}>
                         <Button outline>Cập nhật giỏ hàng</Button>
-                        <Button outline>Tiếp tục mua sắm</Button>
+                        <Button outline to={routes.home}>
+                            Tiếp tục mua sắm
+                        </Button>
                     </div>
                 </div>
                 <h3>Thông tin thanh toán</h3>

@@ -3,7 +3,7 @@ import * as httpRequest from '~/ultils/httpRequest';
 export const register = async (req) => {
     //console.log(req);
     try {
-        const res = await httpRequest.post('admin/post.php', {
+        const res = await httpRequest.post('cus/post.php', {
             first_name: req.firstName,
             last_name: req.lastName,
             role: 0,

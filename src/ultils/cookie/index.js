@@ -16,17 +16,6 @@ export const getCookie = (name) => {
         const cookieObj = JSON.parse(decodedCookie);
         return cookieObj;
     }
-    //const cookies = JSON.parse(document.cookie); // tách các cookie thành mảng cookie
-    // giải mã tên cookie
-    // for (let i = 0; i < cookies.length; i++) {
-    //     let cookie = cookies[i].trim();
-    //     if (cookie.indexOf(`${decodedName}=`) === 0) {
-    //         const encodedValue = cookie.substring(`${decodedName}=`.length, cookie.length);
-    //         const decodedValue = decodeURIComponent(encodedValue); // giải mã giá trị cookie
-    //         return decodedValue;
-    //     }
-    // }
-    // return null; // không tìm thấy cookie
 };
 
 export const deleteCookie = (name) => {

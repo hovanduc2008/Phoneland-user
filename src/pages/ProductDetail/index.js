@@ -12,6 +12,7 @@ import { faBoxOpen, faMobileScreen, faMoneyCheck, faShield } from '@fortawesome/
 import { addCart } from '~/ultils/session';
 
 import { getbyid } from '~/ultils/services/productService';
+import routes from '~/config/routes';
 
 const cx = classNames.bind(styles);
 
@@ -43,7 +44,7 @@ function ProductDetail() {
         };
 
         addCart(data);
-        toast.success('Sản phẩm đã được thêm vào giỏ hàng');
+        alert('Sản phẩm đã được thêm vào giỏ hàng');
     };
 
     const contentStyles = !showMore ? { maxHeight: '200px' } : {};
@@ -109,7 +110,7 @@ function ProductDetail() {
                         <Button onClick={addtoCart} outline large>
                             Thêm Vào Giỏ Hàng
                         </Button>
-                        <Button primary large>
+                        <Button to={routes.cart} onClick={addtoCart} primary large>
                             Mua Ngay
                         </Button>
                     </div>

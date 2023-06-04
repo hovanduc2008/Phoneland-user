@@ -13,6 +13,7 @@ import Search from '~/components/SearchForm';
 import { getall } from '~/ultils/services/categoriesService';
 import Menu from '~/components/Menu';
 import { isLogin } from '~/ultils/cookie/checkLogin';
+import { deleteCookie } from '~/ultils/cookie';
 
 const cx = classNames.bind(styles);
 
@@ -29,7 +30,7 @@ function Header() {
     }, []);
 
     useEffect(() => {
-        if (!isLogin()) {
+        if (isLogin()) {
             setMenu([
                 {
                     name: 'Thông tin cá nhân',
@@ -41,6 +42,10 @@ function Header() {
                 },
                 {
                     name: 'Đăng xuất',
+                    onClick: () => {
+                        deleteCookie('login');
+                        window.location.href = routes.home;
+                    },
                 },
             ]);
         } else {

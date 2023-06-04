@@ -4,11 +4,11 @@ import styles from './AuthForm.module.scss';
 
 const cx = classNames.bind(styles);
 
-function CheckInput({ label }) {
+function CheckInput({ label, onChange, value }) {
     return (
         <div className={cx('check')}>
             <div>
-                <input type="checkbox" />
+                <input type="checkbox" onChange={onChange} value={value} />
             </div>
             <div>{label}</div>
         </div>

@@ -55,3 +55,25 @@ export const update = async (req) => {
         console.log(e);
     }
 };
+
+export const register = async (req) => {
+    try {
+        const res = await httpRequest.post('customer/post.php', req);
+        console.log(req);
+        return res.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const login = async (req) => {
+    try {
+        const res = await httpRequest.post('customer/login.php', {
+            username: req.username,
+            password: req.password,
+        });
+        return res.data;
+    } catch (error) {
+        console.log(error);
+    }
+};

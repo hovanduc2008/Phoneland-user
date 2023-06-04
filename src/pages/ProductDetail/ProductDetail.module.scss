@@ -139,7 +139,9 @@
     display: flex;
     justify-content: center;
 }
-.btn button {
+.btn button,
+.btn a {
+    display: block;
     cursor: pointer;
     margin: 10px 0;
     font-size: 1.8rem;

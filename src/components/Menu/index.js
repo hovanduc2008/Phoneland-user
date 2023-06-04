@@ -7,7 +7,7 @@ import styles from './Menu.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Menu({ children, menu, onClick, to }) {
+function Menu({ children, menu }) {
     let Comp = 'span';
 
     return (
@@ -22,7 +22,7 @@ function Menu({ children, menu, onClick, to }) {
                                 Comp = Link;
                             }
                             return (
-                                <div className={cx('item')} key={v4()}>
+                                <div onClick={item.onClick} className={cx('item')} key={v4()}>
                                     <Comp to={item.to}>{item.name}</Comp>
                                 </div>
                             );
