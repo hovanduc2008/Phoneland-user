@@ -4,7 +4,7 @@ export const addCart = (product) => {
     if (existingItem) {
         const updatedItem = {
             ...existingItem,
-            quantity: existingItem.quantity + 1,
+            quantity: parseInt(existingItem.quantity) + 1,
         };
         const updatedCartItems = cartItems.map((item) => (item === existingItem ? updatedItem : item));
         localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
@@ -16,6 +16,36 @@ export const addCart = (product) => {
         const updatedCartItems = [...cartItems, newItem];
         localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
     }
+};
+
+export const update = (product, newQuantity) => {
+    if (isNaN(newQuantity) || newQuantity < 1) {
+        newQuantity = 1;
+    }
+
+    const existingItem = cartItems.find((item) => item.product.id === product.id);
+    if (existingItem) {
+        const updatedItem = {
+            ...existingItem,
+            quantity: newQuantity,
+        };
+        console.log(updatedItem);
+        const updatedCartItems = cartItems.map((item) => (item === existingItem ? updatedItem : item));
+        localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+    }
+};
+
+export const getCart = () => {
+    return cartItems;
+};
+export const removeFromCart = (product) => {
+    const updatedCartItems = cartItems.filter((item) => item.product.id !== product.id);
+    localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+};
+
+export const removeItem = (product) => {
+    const updatedCartItems = cartItems.filter((item) => item.product.id !== product.id);
+    localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
 };
 
 export const calculateTotal = (cartItems) => {

@@ -1,79 +1,64 @@
 import classNames from 'classnames/bind';
 import { useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from './Articles.module.scss';
 import ArticlesIntro from '~/components/ArticlesIntro';
 import Item from '~/components/ArticlesIntro/Item';
+import { getall } from '~/ultils/services/categoriesService';
+import { getall as getallar } from '~/ultils/services/articlesService';
+import { v4 } from 'uuid';
+import ArticleSidebar from './ArticleSidebar';
 
 const cx = classNames.bind(styles);
 
 function Articles() {
     const { id } = useParams();
-    const [active, setActive] = useState(id);
+    const [articles, setArticles] = useState([]);
+    const [items, setItems] = useState([]);
 
-    const menu = [
-        {
-            id: 1,
-            title: 'Tin Tức',
-        },
-        {
-            id: 2,
-            title: 'Khám Phá',
-        },
-        {
-            id: 3,
-            title: 'Review',
-        },
-    ];
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await getall('', '', '');
+            if (response.status === 'success') {
+                setArticles(response.data);
+            } else {
+                setArticles([]);
+            }
+        };
+        fetchData();
+    }, [id]);
+
+    useEffect(() => {
+        if (id) {
+            const fetchData = async () => {
+                const response = await getallar('', id.split('-')[0], '');
+                if (response.status === 'success') {
+                    setItems(response.data);
+                } else {
+                    setItems([]);
+                }
+            };
+            fetchData();
+        }
+    }, [id]);
 
     return (
         <div className={cx('wrapper')}>
             {id ? (
                 <div className={cx('list')}>
-                    <aside className={cx('sidebar')}>
-                        {menu.map((item) => {
-                            return (
-                                <div
-                                    style={active === item.id ? { color: '#0066CC' } : {}}
-                                    onClick={() => {
-                                        setActive(item.id);
-                                    }}
-                                >
-                                    {item.title}
-                                </div>
-                            );
-                        })}
-                    </aside>
-
+                    <ArticleSidebar />
                     <div className={cx('items')}>
-                        <Item
-                            title="Đánh giá cấu hình iPhone 14 có mạnh như lời đồn"
-                            date="29/05/2023"
-                            image="https://shopdunk.com/images/thumbs/0017798_Man-hinh-Super-Retina-XDR-OLED-voi-ProMotion-120Hz-tren-iPhone-14-Pro-Max_1600.png"
-                        />
-                        <Item
-                            title="Tại sao Apple Watch Series 3 phải dùng eSIM? "
-                            date="19/05/2023"
-                            image="https://shopdunk.com/images/thumbs/0017792_4133385_Apple_Watch_3_1600.jpeg"
-                        />
-                        <Item
-                            title="Lịch sử về Apple Watch: Hành trình sứ mệnh mang đến sự thành công "
-                            date="19/05/2023"
-                            image="https://shopdunk.com/images/thumbs/0016330_review-ipad-pro-m2_1600.png"
-                        />
-                        <Item
-                            title="iPhone 14 Plus và 13 Pro Max: “Kẻ 8 lạng, người nửa cân”"
-                            date="29/05/2023"
-                            image="https://shopdunk.com/images/thumbs/0017789_iPhone-13-Pro-Max-nang-hon-iPhone-14-Plus_1600.png"
-                        />
+                        {items.map((item) => {
+                            return <Item key={v4()} props={item} />;
+                        })}
                     </div>
                 </div>
             ) : (
                 <div>
-                    <ArticlesIntro id="1" title="Tin Tức" />
-                    <ArticlesIntro id="2" title="Khám Phá" />
-                    <ArticlesIntro id="3" title="Review" />
+                    {articles.map((item) => {
+                        return item.type === '1' ? <ArticlesIntro key={v4()} id={item.id} title={item.name} /> : null;
+                    })}
                 </div>
             )}
         </div>

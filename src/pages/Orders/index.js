@@ -1,27 +1,53 @@
 import classNames from 'classnames/bind';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import styles from './Order.module.scss';
-import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+
+import { getall } from '~/ultils/services/OrdersService';
+import { useEffect, useState } from 'react';
+import { v4 } from 'uuid';
 
 const cx = classNames.bind(styles);
 
 function Orders() {
+    const [orders, setOrders] = useState([]);
+    const [active, setActive] = useState('');
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await getall(1, '');
+            if (response.status === 'success') {
+                console.log(response.data);
+                setOrders(response.data);
+            } else {
+                setOrders([]);
+            }
+        };
+        fetchData();
+    }, []);
+
+    useEffect(() => {});
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('list')}>
                 <h3>Danh sách đơn hàng</h3>
                 <div>
-                    <div style={{ background: '#ccc' }} class={cx('item')}>
-                        <p>Mã đơn: 1</p>
-                        <p>Ngày tạo: 13/7/2023</p>
-                        <p>Tổng tiền: 13.000.000đ</p>
-                    </div>
-                    <div class={cx('item')}>
-                        <p>Mã đơn: 2</p>
-                        <p>Ngày tạo: 20/7/2023</p>
-                        <p>Tổng tiền: 15.000.000đ</p>
-                    </div>
+                    {orders.map((item) => {
+                        return (
+                            <div
+                                onClick={() => {
+                                    setActive(item.id);
+                                }}
+                                key={v4()}
+                                className={cx('item')}
+                                style={item.id === active ? { background: '#ccc' } : { background: '#ddd' }}
+                            >
+                                <p>Mã đơn: {item.id}</p>
+                                <p>Ngày tạo: {item.created_at}</p>
+                                <p>Tổng tiền: {item.price_total}đ</p>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
             <div className={cx('detail')}>
@@ -60,9 +86,7 @@ function Orders() {
                                         </div>
                                     </td>
                                     <td>9.000.000đ</td>
-                                    <td>
-                                        <input value="1" style={{ textAlign: 'center' }} type="text" />
-                                    </td>
+                                    <td style={{ textAlign: 'center' }}>1</td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -77,9 +101,7 @@ function Orders() {
                                         </div>
                                     </td>
                                     <td>9.000.000đ</td>
-                                    <td>
-                                        <input value="1" style={{ textAlign: 'center' }} type="text" />
-                                    </td>
+                                    <td style={{ textAlign: 'center' }}>1</td>
                                 </tr>
                             </tbody>
                         </table>

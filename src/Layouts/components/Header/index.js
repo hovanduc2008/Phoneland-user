@@ -1,26 +1,56 @@
-import classNames from 'classnames/bind';
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBagShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { v4 } from 'uuid';
-
-import routes from '~/config/routes';
+import { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
+import classNames from 'classnames/bind';
 import Logo from '~/Layouts/components/Logo';
-import styles from './Header.module.scss';
-import Search from '~/components/SearchForm';
-import { getall } from '~/ultils/services/categoriesService';
 import Menu from '~/components/Menu';
 import { isLogin } from '~/ultils/cookie/checkLogin';
+import Search from '~/components/SearchForm';
+import { getall } from '~/ultils/services/categoriesService';
 import { deleteCookie } from '~/ultils/cookie';
+import { getCart } from '~/ultils/session';
+import routes from '~/config/routes';
+import styles from './Header.module.scss';
 
 const cx = classNames.bind(styles);
 
 function Header() {
     const [showSearch, setShowSearch] = useState(false);
     const [cate, setCate] = useState([]);
-    const [menu, setMenu] = useState([]);
+    const menuItems = useMemo(() => {
+        return isLogin()
+            ? [
+                  {
+                      name: 'Thông tin cá nhân',
+                      to: routes.profile,
+                  },
+                  {
+                      name: 'Đơn hàng',
+                      to: routes.orders,
+                  },
+                  {
+                      name: 'Đăng xuất',
+                      onClick: () => {
+                          deleteCookie('login');
+                          window.location.href = routes.home;
+                      },
+                  },
+              ]
+            : [
+                  {
+                      name: 'Đăng nhập',
+                      to: routes.login,
+                  },
+                  {
+                      name: 'Đăng ký',
+                      to: routes.signup,
+                  },
+              ];
+    }, []);
+
     useEffect(() => {
         const fetchData = async () => {
             const response = await getall('', '');
@@ -29,38 +59,9 @@ function Header() {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        if (isLogin()) {
-            setMenu([
-                {
-                    name: 'Thông tin cá nhân',
-                    to: routes.profile,
-                },
-                {
-                    name: 'Đơn hàng',
-                    to: routes.orders,
-                },
-                {
-                    name: 'Đăng xuất',
-                    onClick: () => {
-                        deleteCookie('login');
-                        window.location.href = routes.home;
-                    },
-                },
-            ]);
-        } else {
-            setMenu([
-                {
-                    name: 'Đăng nhập',
-                    to: routes.login,
-                },
-                {
-                    name: 'Đăng ký',
-                    to: routes.signup,
-                },
-            ]);
-        }
-    }, []);
+    const handleToggleSearch = () => {
+        setShowSearch(!showSearch);
+    };
 
     return (
         <header className={cx('wrapper')}>
@@ -90,21 +91,17 @@ function Header() {
                 )}
             </div>
             <div className={cx('control')}>
-                <div
-                    className={cx('search-btn')}
-                    onClick={() => {
-                        setShowSearch(!showSearch);
-                    }}
-                >
+                <div className={cx('search-btn')} onClick={handleToggleSearch}>
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </div>
                 <div className={cx('cart')}>
+                    {getCart().length > 0 && <div className={cx('quantity')}>{getCart().length}</div>}
                     <Link to={routes.cart}>
                         <FontAwesomeIcon icon={faBagShopping} />
                     </Link>
                 </div>
                 <div className={cx('user')}>
-                    <Menu menu={menu}>
+                    <Menu menu={menuItems}>
                         <FontAwesomeIcon icon={faUser} />
                     </Menu>
                 </div>

@@ -23,6 +23,7 @@
     border-radius: 10px;
     background-color: #fff;
     font-size: 1.8rem;
+    text-align: justify;
 }
 .content img {
     width: 100%;
@@ -30,4 +31,16 @@
     border-radius: 13px;
     margin: 20px 0;
     object-fit: cover;
+}
+.created_at {
+    color: #6e6e6e;
+    font-size: 1.6rem;
+    text-align: right;
+}
+
+.summary {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 13px;
+    text-align: justify;
 }
