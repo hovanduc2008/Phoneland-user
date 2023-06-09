@@ -6,11 +6,22 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import styles from './Cart.module.scss';
 
 import { update, removeFromCart } from '~/ultils/session';
+import { getbyid } from '~/ultils/services/productService';
 
 const cx = classNames.bind(styles);
 
 function CartItem({ item, onUpdateTotal }) {
     const [quantity, setQuantity] = useState(item.quantity);
+    const [product, setProduct] = useState({});
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await getbyid(item.product.id);
+            console.log(response);
+            setProduct(response.data[0]);
+        };
+        fetchData();
+    }, [item]);
 
     const formatPrice = useMemo(() => new Intl.NumberFormat('vi-VN').format(item.product.price), [item.product.price]);
 
@@ -50,9 +61,9 @@ function CartItem({ item, onUpdateTotal }) {
                         handleUpdate(newQuantity);
                     }}
                     style={{ textAlign: 'center' }}
-                    type="text"
+                    type="number"
                     min="1"
-                    max={item.product.in_stock}
+                    max={product.amount}
                 />
             </td>
             <td>

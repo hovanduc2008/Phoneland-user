@@ -14,6 +14,15 @@ export const getall = async (id, t) => {
     }
 };
 
+export const create = async (req) => {
+    try {
+        const res = await httpRequest.post('orders/post.php', req);
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const getrecents = async () => {
     try {
         const res = await httpRequest.get('orders/getrecents.php');
@@ -35,6 +44,19 @@ export const count = async () => {
 export const getbyid = async (id) => {
     try {
         const res = await httpRequest.get('orders/getbyid.php', {
+            params: {
+                id: id,
+            },
+        });
+        return res;
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+export const getbyuserid = async (id) => {
+    try {
+        const res = await httpRequest.get('orders/getbyuserid.php', {
             params: {
                 id: id,
             },

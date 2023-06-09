@@ -60,6 +60,7 @@ function ProductDetail() {
                 <div className={cx('overview')}>
                     <div className={cx('name')}>
                         <p>{product.title}</p>
+                        <p className={cx('amount')}>Còn lại: {product.amount}</p>
                     </div>
                     <div className={cx('info')}>
                         <div>{formatPrice + `đ`}</div>
@@ -106,14 +107,18 @@ function ProductDetail() {
                             </div>
                         </div>
                     </div>
-                    <div className={cx('btn')}>
-                        <Button onClick={addtoCart} outline large>
-                            Thêm Vào Giỏ Hàng
-                        </Button>
-                        <Button to={routes.cart} onClick={addtoCart} primary large>
-                            Mua Ngay
-                        </Button>
-                    </div>
+                    {product.amount <= 0 ? (
+                        <div className={cx('over')}>Hết Hàng</div>
+                    ) : (
+                        <div className={cx('btn')}>
+                            <Button onClick={addtoCart} outline large>
+                                Thêm Vào Giỏ Hàng
+                            </Button>
+                            <Button to={routes.cart} onClick={addtoCart} primary large>
+                                Mua Ngay
+                            </Button>
+                        </div>
+                    )}
                 </div>
             </div>
             <div className={cx('detail')}>

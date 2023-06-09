@@ -51,17 +51,8 @@ function Products() {
             <div className={cx('title')}>{cate.name && cate.name}</div>
             <div className={cx('list')}>
                 {products.map((item) => {
-                    const formatPrice = new Intl.NumberFormat('vi-VN').format(item.price);
                     if (item.status === '1') {
-                        return (
-                            <ProductItem
-                                id={item.id}
-                                key={v4()}
-                                image={item.avatar}
-                                name={item.title}
-                                price={formatPrice + 'đ'}
-                            />
-                        );
+                        return <ProductItem props={item} />;
                     }
                 })}
             </div>

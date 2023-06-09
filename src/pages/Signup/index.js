@@ -83,12 +83,9 @@ function Signup() {
             });
 
             if (response.status === 'success') {
-                setCookie('login', {
-                    username: username,
-                });
                 setIsSucces(true);
                 setTimeout(() => {
-                    window.location.href = routes.home;
+                    window.location.href = routes.login;
                 }, 1000);
             } else {
                 setErrorMessage(response.message);

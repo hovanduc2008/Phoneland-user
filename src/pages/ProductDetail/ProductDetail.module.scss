@@ -61,6 +61,14 @@
     font-weight: 600;
     padding: 20px 0;
     border-bottom: 2px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.amount {
+    font-size: 1.5rem;
+    font-weight: 500;
 }
 .info > div {
     font-size: 1.8rem;
@@ -159,4 +167,12 @@
 .row p {
     display: flex;
     align-items: center;
+}
+
+.over {
+    display: flex;
+    justify-content: center;
+    font-size: 4rem;
+    color: #0066cc;
+    margin-top: 20px;
 }

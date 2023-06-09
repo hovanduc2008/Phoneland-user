@@ -34,11 +34,23 @@ export const topprice = async () => {
 };
 
 export const getbyid = async (id) => {
-    //console.log(req);
     try {
         const res = await httpRequest.get('customer/getbyid.php', {
             params: {
                 id: id,
+            },
+        });
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getbyuser = async (user) => {
+    try {
+        const res = await httpRequest.get('customer/getbyusername.php', {
+            params: {
+                username: user,
             },
         });
         return res;

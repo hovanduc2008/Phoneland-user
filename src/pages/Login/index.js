@@ -57,10 +57,17 @@ function Login() {
             const response = await login(data);
             if (response.status === 'success') {
                 if (isChecked) {
-                    setCookie('login', data);
-                    setCookie('info', data);
+                    setCookie('login', {
+                        id: response.id,
+                        ...data,
+                    });
+                    setCookie('info', {
+                        id: response.id,
+                        ...data,
+                    });
                 } else {
                     setCookie('login', {
+                        id: response.id,
                         username: username,
                     });
                 }

@@ -4,7 +4,8 @@ import styles from './ProductItem.module.scss';
 
 const cx = classNames.bind(styles);
 
-function ProductItem({ ...props }) {
+function ProductItem({ props }) {
+    const formatPrice = new Intl.NumberFormat('vi-VN').format(props.price);
     return (
         <div
             className={cx('wrapper')}
@@ -12,12 +13,13 @@ function ProductItem({ ...props }) {
                 window.location.href = `/product-detail/${props.id}`;
             }}
         >
+            {props.amount <= 0 ? <div className={cx('modal')}>Hết hàng</div> : null}
             <div className={cx('img')}>
-                <img src={props.image} alt={props.name} />
+                <img src={props.avatar} alt={props.title} />
             </div>
             <div className={cx('info')}>
-                <p>{props.name}</p>
-                <p>{props.price}</p>
+                <p>{props.title}</p>
+                <p>{formatPrice}đ</p>
             </div>
         </div>
     );

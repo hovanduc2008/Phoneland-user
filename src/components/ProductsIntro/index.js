@@ -31,16 +31,7 @@ function ProductsIntro({ title, id }) {
             <h2 className={cx('title')}>{title}</h2>
             <div className={cx('list')}>
                 {products.map((item) => {
-                    const formatPrice = new Intl.NumberFormat('vi-VN').format(item.price);
-                    return (
-                        <ProductItem
-                            key={v4()}
-                            image={item.avatar}
-                            name={item.title}
-                            price={formatPrice + `đ`}
-                            id={item.id}
-                        />
-                    );
+                    return <ProductItem key={v4()} props={item} />;
                 })}
             </div>
             <div className={cx('more')}>

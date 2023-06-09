@@ -50,3 +50,28 @@
     grid-template-columns: repeat(2, 1fr);
     margin: 10px 0;
 }
+
+.table img {
+    height: 70px;
+    object-fit: cover;
+}
+
+.action {
+    display: flex;
+    justify-content: end;
+    margin-top: 20px;
+}
+
+.btn-delete,
+.btn-payment {
+    padding: 7px 13px;
+}
+
+.btn-delete {
+    background-color: red;
+    border: 1px solid red;
+    &:hover {
+        border: 1px solid red;
+        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06), #ff8080);
+    }
+}
