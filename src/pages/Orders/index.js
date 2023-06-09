@@ -73,7 +73,7 @@ function Orders() {
                             <p>Địa chỉ: {active.address}</p>
                             <p>Điện thoại: {active.mobile}</p>
                             <p>Email: {active.email}</p>
-                            <p>Thành tiền: 18.000.000đ</p>
+                            <p>Thành tiền: {active.price_total}đ</p>
                         </div>
                         <div>
                             <p>Ghi chú: {active.note}</p>
