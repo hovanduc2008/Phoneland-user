@@ -5,6 +5,8 @@ import { v4 } from 'uuid';
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
+import { useNavigate } from 'react-router-dom';
+
 import Logo from '~/Layouts/components/Logo';
 import Menu from '~/components/Menu';
 import { isLogin } from '~/ultils/cookie/checkLogin';
@@ -14,12 +16,17 @@ import { deleteCookie } from '~/ultils/cookie';
 import { getCart } from '~/ultils/session';
 import routes from '~/config/routes';
 import styles from './Header.module.scss';
+import SearchList from '~/components/SearchForm/SearchList';
 
 const cx = classNames.bind(styles);
 
 function Header() {
     const [showSearch, setShowSearch] = useState(false);
+    const [search, setSearch] = useState('');
     const [cate, setCate] = useState([]);
+
+    const navigate = useNavigate();
+
     const menuItems = useMemo(() => {
         return isLogin()
             ? [
@@ -60,7 +67,11 @@ function Header() {
     }, []);
 
     const handleToggleSearch = () => {
-        setShowSearch(!showSearch);
+        if (search) {
+            navigate('/search/' + search);
+        } else {
+            setShowSearch(!showSearch);
+        }
     };
 
     return (
@@ -68,7 +79,14 @@ function Header() {
             <div className={cx('left-menu')}>
                 <Logo />
                 {showSearch ? (
-                    <Search />
+                    <SearchList>
+                        <Search
+                            value={search}
+                            onChange={(e) => {
+                                setSearch(e.target.value);
+                            }}
+                        />
+                    </SearchList>
                 ) : (
                     <div className={cx('menu')}>
                         {cate.map((item) => {

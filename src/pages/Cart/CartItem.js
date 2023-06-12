@@ -17,7 +17,6 @@ function CartItem({ item, onUpdateTotal }) {
     useEffect(() => {
         const fetchData = async () => {
             const response = await getbyid(item.product.id);
-            console.log(response);
             setProduct(response.data[0]);
         };
         fetchData();

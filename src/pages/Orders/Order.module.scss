@@ -6,12 +6,25 @@
     grid-gap: 30px;
 }
 .item {
+    cursor: pointer;
     margin: 20px 0;
-    background-color: rgb(206, 201, 201, 0.3);
     padding: 7px 13px;
     border-radius: 13px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    position: relative;
+    overflow: hidden;
+}
+.status {
+    position: absolute;
+    height: 100%;
+    width: 7px;
+    top: 0;
+    left: 0;
+}
+.scroll {
+    height: 100vh;
+    overflow-y: auto;
 }
 .item p {
     &:nth-child(2n + 2) {

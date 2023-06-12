@@ -52,8 +52,9 @@ function Products() {
             <div className={cx('list')}>
                 {products.map((item) => {
                     if (item.status === '1') {
-                        return <ProductItem props={item} />;
+                        return <ProductItem key={v4()} props={item} />;
                     }
+                    return null;
                 })}
             </div>
 

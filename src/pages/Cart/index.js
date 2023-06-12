@@ -10,6 +10,7 @@ import styles from './Cart.module.scss';
 import { v4 } from 'uuid';
 import { getCookie } from '~/ultils/cookie';
 import { create } from '~/ultils/services/OrdersService';
+import { isLogin } from '~/ultils/cookie/checkLogin';
 
 const cx = classNames.bind(styles);
 
@@ -44,8 +45,7 @@ function Cart() {
     useEffect(() => {
         const call = () => {
             localStorage.setItem('cartItems', JSON.stringify(items));
-            const formattedNumber = new Intl.NumberFormat('vi-VN').format(calculateTotal(items));
-            setTotal(formattedNumber);
+            setTotal(calculateTotal(items));
         };
         call();
     }, [items]);
@@ -65,18 +65,22 @@ function Cart() {
                 products: items,
             };
 
-            const fetchData = async () => {
-                const response = await create(payload);
-                console.log(response.data);
-                if (response.data.status === 'success') {
-                    localStorage.setItem('cartItems', JSON.stringify([]));
-                    setItems([]);
-                    alert('Đặt hàng thành công');
-                } else {
-                    alert(response.data.message);
-                }
-            };
-            fetchData();
+            if (isLogin()) {
+                const fetchData = async () => {
+                    const response = await create(payload);
+                    console.log(response.data);
+                    if (response.data.status === 'success') {
+                        localStorage.setItem('cartItems', JSON.stringify([]));
+                        setItems([]);
+                        alert('Đặt hàng thành công');
+                    } else {
+                        alert(response.data.message);
+                    }
+                };
+                fetchData();
+            } else {
+                alert('Đăng nhập để đặt hàng');
+            }
         }
     };
 
@@ -154,7 +158,7 @@ function Cart() {
                         <div className={cx('sidebar-cart')}>
                             <div className={cx('sum')}>
                                 <p>Tổng cộng: </p>
-                                <p>{total}đ</p>
+                                <p>{new Intl.NumberFormat('vi-VN').format(total)}đ</p>
                             </div>
                             <div>
                                 <Button className={cx('btn-submit')} onClick={submit} primary>

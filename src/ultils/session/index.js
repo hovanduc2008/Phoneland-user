@@ -1,5 +1,5 @@
-const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
 export const addCart = (product) => {
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
     const existingItem = cartItems.find((item) => item.product.id === product.id);
     if (existingItem) {
         const updatedItem = {
@@ -19,6 +19,7 @@ export const addCart = (product) => {
 };
 
 export const update = (product, newQuantity) => {
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
     if (isNaN(newQuantity) || newQuantity < 1) {
         newQuantity = 1;
     }
@@ -36,14 +37,17 @@ export const update = (product, newQuantity) => {
 };
 
 export const getCart = () => {
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
     return cartItems;
 };
 export const removeFromCart = (product) => {
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
     const updatedCartItems = cartItems.filter((item) => item.product.id !== product.id);
     localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
 };
 
 export const removeItem = (product) => {
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
     const updatedCartItems = cartItems.filter((item) => item.product.id !== product.id);
     localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
 };

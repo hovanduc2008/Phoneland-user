@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 
 import styles from './Order.module.scss';
 
-import { getbyuserid, getbyid } from '~/ultils/services/OrdersService';
+import { getbyuserid, getbyid, deleted } from '~/ultils/services/OrdersService';
 import { getCookie } from '~/ultils/cookie';
 import { useEffect, useState } from 'react';
 import { v4 } from 'uuid';
@@ -20,6 +20,7 @@ function Orders() {
             const response = await getbyuserid(getCookie('login').id);
             if (response.status === 'success') {
                 setOrders(response.data);
+                console.log(response.data);
             } else {
                 setOrders([]);
             }
@@ -28,7 +29,6 @@ function Orders() {
     }, []);
 
     useEffect(() => {
-        console.log(active);
         const fetchData = async () => {
             const response = await getbyid(active.id);
             if (response.status === 'success') {
@@ -44,8 +44,9 @@ function Orders() {
         <div className={cx('wrapper')}>
             <div className={cx('list')}>
                 <h3>Danh sách đơn hàng</h3>
-                <div>
+                <div className={cx('scroll')}>
                     {orders.map((item) => {
+                        const formatPrice = new Intl.NumberFormat('vi-VN').format(item.price_total);
                         return (
                             <div
                                 onClick={() => {
@@ -53,11 +54,17 @@ function Orders() {
                                 }}
                                 key={v4()}
                                 className={cx('item')}
-                                style={item.id === active ? { background: '#ccc' } : { background: '#ddd' }}
+                                style={item === active ? { background: '#ccc' } : { background: '#ddd' }}
                             >
                                 <p>Mã đơn: {item.id}</p>
                                 <p>Ngày tạo: {item.created_at}</p>
-                                <p>Tổng tiền: {item.price_total}đ</p>
+                                <p>Tổng tiền: {formatPrice}đ</p>
+                                <div
+                                    className={cx('status')}
+                                    style={
+                                        item.payment_status === '1' ? { background: 'green' } : { background: 'red' }
+                                    }
+                                ></div>
                             </div>
                         );
                     })}
@@ -73,7 +80,7 @@ function Orders() {
                             <p>Địa chỉ: {active.address}</p>
                             <p>Điện thoại: {active.mobile}</p>
                             <p>Email: {active.email}</p>
-                            <p>Thành tiền: {active.price_total}đ</p>
+                            <p>Thành tiền: {new Intl.NumberFormat('vi-VN').format(active.price_total)}đ</p>
                         </div>
                         <div>
                             <p>Ghi chú: {active.note}</p>
@@ -102,7 +109,9 @@ function Orders() {
                                                             <p>{item.title}</p>
                                                         </div>
                                                     </td>
-                                                    <td>{item.price_total}</td>
+                                                    <td>
+                                                        {new Intl.NumberFormat('vi-VN').format(item.product_price)}đ
+                                                    </td>
                                                     <td style={{ textAlign: 'center' }}>{item.quantity}</td>
                                                 </tr>
                                             );
@@ -123,7 +132,7 @@ function Orders() {
                                 </>
                             ) : (
                                 <>
-                                    <Button className={cx('btn-delete')} primary small>
+                                    <Button className={cx('btn-delete')} primary small onClick={async () => {}}>
                                         Hủy đơn
                                     </Button>
                                     <Button className={cx('btn-payment')} primary small>

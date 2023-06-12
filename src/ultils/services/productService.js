@@ -16,6 +16,22 @@ export const getall = async (n, p, c, s) => {
     }
 };
 
+export const search = async (n, l1, l2, s) => {
+    try {
+        const res = await httpRequest.get('product/search.php', {
+            params: {
+                n: n,
+                l1: l1,
+                l2: l2,
+                s: s,
+            },
+        });
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const deleted = async (id) => {
     try {
         const res = await httpRequest.deleted('product/delete.php', {
