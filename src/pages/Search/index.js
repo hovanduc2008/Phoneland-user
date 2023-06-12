@@ -26,7 +26,6 @@ function Search() {
         setsearchValue(s);
         const fetchData = async () => {
             const resposne = await search(s, limit[0], limit[1], sort);
-            console.log(resposne);
             if (resposne.status === 'success') {
                 setData(resposne.data);
             } else {
@@ -81,6 +80,7 @@ function Search() {
                             }}
                             value={limit[0]}
                             min="0"
+                            step="100000"
                             type="number"
                         />
                     </div>
@@ -91,6 +91,7 @@ function Search() {
                                 setLimit([limit[0], e.target.value]);
                             }}
                             value={limit[1]}
+                            step="100000"
                             min="0"
                             type="number"
                         />

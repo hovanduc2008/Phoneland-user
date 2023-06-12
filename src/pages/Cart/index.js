@@ -10,6 +10,7 @@ import styles from './Cart.module.scss';
 import { v4 } from 'uuid';
 import { getCookie } from '~/ultils/cookie';
 import { create } from '~/ultils/services/OrdersService';
+import { getbyid } from '~/ultils/services/userService';
 import { isLogin } from '~/ultils/cookie/checkLogin';
 
 const cx = classNames.bind(styles);
@@ -27,7 +28,24 @@ function Cart() {
     });
 
     useEffect(() => {
-        console.log(items);
+        if (isLogin()) {
+            const fetchData = async () => {
+                const response = await getbyid(getCookie('login').id);
+                const user = response.data[0];
+
+                setBillingInfo({
+                    ...billingInfo,
+                    fullName: `${user.first_name} ${user.last_name}`,
+                    address: `${user.address}`,
+                    email: `${user.email}`,
+                    phone: `${user.phone}`,
+                });
+            };
+            fetchData();
+        }
+    }, []);
+
+    useEffect(() => {
         if (billingInfo.fullName && billingInfo.address && billingInfo.email && billingInfo.phone) {
             setIsValid(true);
         } else {
@@ -68,7 +86,6 @@ function Cart() {
             if (isLogin()) {
                 const fetchData = async () => {
                     const response = await create(payload);
-                    console.log(response.data);
                     if (response.data.status === 'success') {
                         localStorage.setItem('cartItems', JSON.stringify([]));
                         setItems([]);
