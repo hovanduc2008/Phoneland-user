@@ -28,6 +28,7 @@ function ProductDetail() {
         const fetchData = async () => {
             const response = await getbyid(id);
             if (response.status === 'success') {
+                console.log(content);
                 setProduct(response.data[0]);
                 setContent(response.data[0].content.split('*||*'));
             }
@@ -66,13 +67,13 @@ function ProductDetail() {
                         <div>{formatPrice + `đ`}</div>
                         <div>
                             <p>Dung lượng:</p>
-                            <p>{content[0]}</p>
+                            <p>{content[1]}</p>
                         </div>
                         <div>
                             <p>Màu sắc:</p>
                             <p
                                 style={{
-                                    background: content[1],
+                                    background: product.color,
                                 }}
                             ></p>
                         </div>

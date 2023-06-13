@@ -21,7 +21,7 @@ function Slider({ className, props }) {
             <Swiper
                 // install Swiper modules
                 modules={[Navigation, Pagination, Scrollbar, A11y]}
-                autoplay={{ delay: 3000 }}
+                autoplay={{ delay: 300 }}
                 loop={true}
                 slidesPerView={1}
                 navigation
