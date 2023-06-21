@@ -31,7 +31,9 @@ function ProductsIntro({ title, id }) {
             <h2 className={cx('title')}>{title}</h2>
             <div className={cx('list')}>
                 {products.map((item) => {
-                    return <ProductItem key={v4()} props={item} />;
+                    if (item.status === '1') {
+                        return <ProductItem key={v4()} props={item} />;
+                    }
                 })}
             </div>
             <div className={cx('more')}>

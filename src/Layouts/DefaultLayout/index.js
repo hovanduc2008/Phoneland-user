@@ -25,7 +25,7 @@ function DefaultLayout({ children }) {
             } else {
                 const response = await getall('');
                 if (response.status === 'success') {
-                    setSlide(response.data);
+                    setSlide(response.data.slice(0, 7));
                 } else {
                     setSlide([]);
                 }
