@@ -31,7 +31,6 @@ function AricleDetail() {
             {id.split('-')[1] ? (
                 <>
                     <ArticleSidebar />
-
                     <div className={cx('content')}>
                         <h2>{article.name}</h2>
                         <p className={cx('created_at')}>{article.created_at}</p>

@@ -34,6 +34,7 @@ function ProductsIntro({ title, id }) {
                     if (item.status === '1') {
                         return <ProductItem key={v4()} props={item} />;
                     }
+                    return null;
                 })}
             </div>
             <div className={cx('more')}>

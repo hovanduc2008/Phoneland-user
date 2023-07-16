@@ -1,4 +1,4 @@
-import { faBagShopping, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faBagShopping, faBars, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { v4 } from 'uuid';
@@ -23,6 +23,7 @@ const cx = classNames.bind(styles);
 function Header() {
     const [showSearch, setShowSearch] = useState(false);
     const [search, setSearch] = useState('');
+    const [showMenu, setShowMenu] = useState(false);
     const [cate, setCate] = useState([]);
 
     const navigate = useNavigate();
@@ -122,6 +123,67 @@ function Header() {
                     <Menu menu={menuItems}>
                         <FontAwesomeIcon icon={faUser} />
                     </Menu>
+                </div>
+            </div>
+
+            <div className={cx('menu-bars')}>
+                <div className={cx('cart')}>
+                    {getCart().length > 0 && <div className={cx('quantity')}>{getCart().length}</div>}
+                    <Link to={routes.cart}>
+                        <FontAwesomeIcon icon={faBagShopping} />
+                    </Link>
+                </div>
+                <div
+                    className={cx('menu-toggle')}
+                    onClick={() => {
+                        setShowMenu(!showMenu);
+                    }}
+                >
+                    <FontAwesomeIcon icon={faBars} />
+                </div>
+            </div>
+
+            <div
+                className={cx('menu-list')}
+                onClick={() => {
+                    setShowMenu(false);
+                }}
+                style={showMenu ? { display: 'block' } : { display: 'none' }}
+            >
+                <div className={cx('profile')}>
+                    <Link to={isLogin() ? routes.profile : routes.login}>
+                        <FontAwesomeIcon icon={faUser} />
+                        <span>Thông tin cá nhân</span>
+                    </Link>
+                </div>
+                <div className={cx('menu-list_list')}>
+                    <div className={cx('menu_2')}>
+                        {cate.map((item) => {
+                            if (item.type === '0' && item.status === '1')
+                                return (
+                                    <p key={v4()}>
+                                        <Link className={cx('link')} to={`/products/` + item.id}>
+                                            {item.name}
+                                        </Link>
+                                    </p>
+                                );
+                            return null;
+                        })}
+                        <p>
+                            <Link className={cx('link')} to={routes.articles}>
+                                Bài Viết
+                            </Link>
+                        </p>
+                    </div>
+                </div>
+                <div className={cx('menu-list_control')}>
+                    {menuItems.map((item) => {
+                        return (
+                            <Link key={v4()} onClick={item.onClick} to={item.to}>
+                                {item.name}
+                            </Link>
+                        );
+                    })}
                 </div>
             </div>
         </header>

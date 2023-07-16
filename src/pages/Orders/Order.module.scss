@@ -88,3 +88,17 @@
         background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06), #ff8080);
     }
 }
+
+@media only screen and (max-width: 767px) {
+    .wrapper {
+        display: block;
+    }
+}
+
+/* tablet */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+}
+
+/* desktop */
+@media only screen and (min-width: 1025px) {
+}

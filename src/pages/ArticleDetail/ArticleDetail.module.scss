@@ -44,3 +44,17 @@
     margin-bottom: 13px;
     text-align: justify;
 }
+
+@media only screen and (max-width: 767px) {
+    .wrapper {
+        display: block;
+    }
+}
+
+/* tablet */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+}
+
+/* desktop */
+@media only screen and (min-width: 1025px) {
+}

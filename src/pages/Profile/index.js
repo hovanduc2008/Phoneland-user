@@ -20,8 +20,6 @@ function Profile() {
         address: '',
         avatar: '',
     });
-    const [imgError, setImgError] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
     const handleDeleteImg = () => {
@@ -40,7 +38,6 @@ function Profile() {
 
     const handleUpdateUser = async () => {
         try {
-            setIsLoading(true);
             setError(null);
             const data = {
                 id: getCookie('login').id,
@@ -56,11 +53,10 @@ function Profile() {
             console.log(response);
             if (response.status === 'success') {
                 setError(null);
-                setIsLoading(false);
+
                 // Thành công, làm gì đó
             }
         } catch (err) {
-            setIsLoading(false);
             setError(err.message);
         }
     };
@@ -68,7 +64,6 @@ function Profile() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                setIsLoading(true);
                 setError(null);
                 const response = await getbyid(getCookie('login').id);
                 if (response.status === 'success') {
@@ -83,10 +78,8 @@ function Profile() {
                         avatar: data.avatar,
                     });
                     setError(null);
-                    setIsLoading(false);
                 }
             } catch (err) {
-                setIsLoading(false);
                 setError(err.message);
             }
         };

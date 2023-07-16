@@ -9,7 +9,6 @@ import Button from '~/components/Button';
 import { Link } from 'react-router-dom';
 import routes from '~/config/routes';
 import { register } from '~/ultils/services/userService';
-import { setCookie } from '~/ultils/cookie';
 
 const cx = classNames.bind(styles);
 
@@ -103,10 +102,14 @@ function Signup() {
             ) : (
                 <>
                     <div className={cx('wrapper')}>
-                        <FormInput type="text" label="Tên: " value={firstName} onChange={handleFirstNameChange} />
-                        <FormInput type="text" label="Họ: " value={lastName} onChange={handleLastNameChange} />
-                        <FormInput type="text" label="Email: " value={email} onChange={handleEmailChange} />
-                        <FormInput type="text" label="Điện thoại: " value={phone} onChange={handlePhoneChange} />
+                        <div className={cx('form')}>
+                            <FormInput type="text" label="Tên: " value={firstName} onChange={handleFirstNameChange} />
+                            <FormInput type="text" label="Họ: " value={lastName} onChange={handleLastNameChange} />
+                        </div>
+                        <div className={cx('form')}>
+                            <FormInput type="text" label="Email: " value={email} onChange={handleEmailChange} />
+                            <FormInput type="text" label="Điện thoại: " value={phone} onChange={handlePhoneChange} />
+                        </div>
                         <FormInput type="text" label="Username" value={username} onChange={handleUsernameChange} />
                         <FormInput
                             type="password"

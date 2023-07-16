@@ -1,7 +1,5 @@
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useParams } from 'react-router-dom';
 
 import styles from './ProductDetail.module.scss';

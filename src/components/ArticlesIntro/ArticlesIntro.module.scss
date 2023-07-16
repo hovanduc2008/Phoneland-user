@@ -21,6 +21,8 @@
 }
 .img-item {
     width: 100%;
+    display: flex;
+    align-items: center;
 }
 .img-item img {
     width: 100%;
@@ -51,4 +53,18 @@
 .all {
     display: flex;
     justify-content: center;
+}
+
+@media only screen and (max-width: 767px) {
+    .list {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+/* tablet */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+}
+
+/* desktop */
+@media only screen and (min-width: 1025px) {
 }

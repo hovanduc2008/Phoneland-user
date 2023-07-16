@@ -71,3 +71,22 @@
     grid-gap: 13px;
     font-size: 1.7rem;
 }
+@media only screen and (max-width: 767px) {
+    .wrapper {
+        display: block;
+    }
+    .form {
+        display: block;
+    }
+    .right h3 {
+        margin-top: 20px;
+    }
+}
+
+/* tablet */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+}
+
+/* desktop */
+@media only screen and (min-width: 1025px) {
+}

@@ -44,30 +44,34 @@ function Orders() {
         <div className={cx('wrapper')}>
             <div className={cx('list')}>
                 <h3>Danh sách đơn hàng</h3>
-                <div className={cx('scroll')}>
-                    {orders.map((item) => {
-                        const formatPrice = new Intl.NumberFormat('vi-VN').format(item.price_total);
-                        return (
-                            <div
-                                onClick={() => {
-                                    setActive(item);
-                                }}
-                                key={v4()}
-                                className={cx('item')}
-                                style={item === active ? { background: '#ccc' } : { background: '#ddd' }}
-                            >
-                                <p>Mã đơn: {item.id}</p>
-                                <p>Ngày tạo: {item.created_at}</p>
-                                <p>Tổng tiền: {formatPrice}đ</p>
+                <div className={cx('class-fake')}>
+                    <div className={cx('scroll')}>
+                        {orders.map((item) => {
+                            const formatPrice = new Intl.NumberFormat('vi-VN').format(item.price_total);
+                            return (
                                 <div
-                                    className={cx('status')}
-                                    style={
-                                        item.payment_status === '1' ? { background: 'green' } : { background: 'red' }
-                                    }
-                                ></div>
-                            </div>
-                        );
-                    })}
+                                    onClick={() => {
+                                        setActive(item);
+                                    }}
+                                    key={v4()}
+                                    className={cx('item')}
+                                    style={item === active ? { background: '#ccc' } : { background: '#ddd' }}
+                                >
+                                    <p>Mã đơn: {item.id}</p>
+                                    <p>Ngày tạo: {item.created_at}</p>
+                                    <p>Tổng tiền: {formatPrice}đ</p>
+                                    <div
+                                        className={cx('status')}
+                                        style={
+                                            item.payment_status === '1'
+                                                ? { background: 'green' }
+                                                : { background: 'red' }
+                                        }
+                                    ></div>
+                                </div>
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
             <div className={cx('detail')}>

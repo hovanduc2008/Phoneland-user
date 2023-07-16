@@ -21,13 +21,14 @@
     width: 90%;
     height: 90%;
     margin-top: 10px;
+    object-fit: contain;
 }
 
 .warranty {
     border: 1px solid #ddd;
     padding: 10px 20px;
     font-size: 1rem;
-    margin: 0 20px;
+    margin: 10px 20px;
     border-radius: 13px;
 }
 
@@ -46,7 +47,6 @@
     min-width: 30px;
 }
 .overview {
-    height: 90%;
     position: relative;
     margin-top: 10px;
     color: #131313;
@@ -57,7 +57,7 @@
 }
 
 .name {
-    font-size: 2.3rem;
+    font-size: 2.2rem;
     font-weight: 600;
     padding: 20px 0;
     border-bottom: 2px solid #ccc;
@@ -110,8 +110,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     background-color: #fff;
-    position: absolute;
-    bottom: 0;
+    position: relative;
 }
 
 .detail {
@@ -168,6 +167,7 @@
 }
 .row p {
     display: flex;
+    padding: 0 5px;
     align-items: center;
 }
 
@@ -177,4 +177,50 @@
     font-size: 4rem;
     color: #0066cc;
     margin-top: 20px;
+}
+
+@media only screen and (max-width: 767px) {
+    .product {
+        display: block;
+    }
+    .parameter {
+        padding: 0;
+    }
+    .btn a,
+    .btn button {
+        font-size: 1.6rem;
+        padding: 10px 5px;
+        display: flex;
+        width: 45%;
+    }
+
+    .btn-sl button {
+        font-size: 1.6rem;
+        padding: 10px 5px;
+    }
+
+    .describe {
+        padding: 0;
+    }
+
+    .detail {
+        padding: 0;
+    }
+    .warranty {
+        margin: 10px 0;
+    }
+}
+
+/* tablet */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .btn a,
+    .btn button {
+        font-size: 1.6rem;
+        padding: 10px 13px;
+        display: flex;
+    }
+}
+
+/* desktop */
+@media only screen and (min-width: 1025px) {
 }
